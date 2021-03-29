@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { Comment, Post, User } = require('../models');
+const { Post, User } = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get('/', (req, res) => {
@@ -13,10 +13,10 @@ router.get('/', (req, res) => {
             ],
         });
 
-        const post = postData.map((post) => post.get({ plain: true }));
+        const posts = postData.map((post) => post.get({ plain: true }));
 
         res.render('homepage', {
-            post,
+            posts,
             logged_in: req.session.logged_in
         });
     } catch (err) {
@@ -35,7 +35,7 @@ router.get('/post/:id', async (req, res) => {
             ],
         });
 
-        const post = postData.map((post) => post.get({ plain: true }));
+        const post = postData.get({ plain: true });
 
         res.render('post', {
             ...post,
@@ -45,5 +45,18 @@ router.get('/post/:id', async (req, res) => {
         res.status(500).json(err);
     }
 });
+
+router.get('/dashboard', withAuth, async (req, res) => {
+    try {
+        const userData = await User.findByPk(req.session.user_id, {
+            attributes: { exclude: ['password'] },
+            include: [{ model: post }]
+        });
+
+        const user = userData.get({ plain: true });
+
+        res.render('dashboard',)
+    }
+})
 
 module.exports = router;
