@@ -14,24 +14,22 @@ User.init(
             type: DataTypes.INTEGER,
             allowNull: false,
             autoIncrement: true,
-            primaryKey: true
+            primaryKey: true,
         },
         username: {
             type: DataTypes.STRING,
             allowNull: false,
             unique: true,
             validate: {
-                isAlphanumeric: true,
-                // ensuring no bad words are used
-                notContains: [["fuck", "shit", "hell", "bitch", "damn"]]
-            }
+                isEmail: true,
+            },
         },
         password: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
-                length: [8, 25]
-            }
+                len: [8]
+            },
         }
     },
     {
@@ -40,14 +38,15 @@ User.init(
                 userData.password = await bcrypt.hash(userData.password, 10);
                 return userData;
             },
-            beforeUpdate: async (userData) => {
-                userData.password = await bcrypt.hash(userData.password, 10);
-                return userData;
+            beforeUpdate: async (updatedUserData) => {
+                updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10);
+                return updatedUserData;
             }
         },
         sequelize,
+        timestamps: false,
         freezeTableName: true,
-        modelName: "user"
+        modelName: 'user'
     }
 );
 
