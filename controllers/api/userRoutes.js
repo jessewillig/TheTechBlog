@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Model } = require('sequelize');
+// const { Model } = require('sequelize');
 const { User } = require('../../models');
 
 router.post('/', async (req, res) => {
@@ -8,6 +8,7 @@ router.post('/', async (req, res) => {
         req.session.save(() => {
             req.session.user_id = userData.id;
             req.session.logged_in = true;
+
             res.status(200).json(userData);
         });
     } catch (err) {
@@ -20,19 +21,20 @@ router.post('/login', async (req, res) => {
         const userData = await User.findOne({ where: { email: req.body.email } });
 
         if (!userData) {
-            res.status(400).json({ message: 'Wrong email or password, please retry' });
+            res.status(400).json({ message: 'Wrong email or password, please retry.' });
             return;
         }
 
         const validPass = await userData.checkPassword(req.body.password);
 
         if (!validPass) {
-            res.status(400).json({ message: 'Wrong email or password, please retry' });
+            res.status(400).json({ message: 'Wrong email or password, please retry.' });
             return;
         }
         req.session.save(() => {
             req.session.user_id = userData.id;
             req.session.logged_in = true;
+            
             res.json({ user: userData, message: 'Successfully logged in!' });
         });
     } catch (err) {
