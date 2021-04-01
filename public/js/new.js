@@ -3,19 +3,19 @@ const newForm = async = function(event) {
 // titel of new post
     const title = document.querySelector('input[name="post-title"]').value;
     const body = document.querySelector('textarea[name="post-body"]').value;
-    const token = localStorage.getItem("token");
-    await fetch("api/post", {
-        method: "POST",
+    const token = localStorage.getItem('token');
+    await fetch('api/post', {
+        method: 'POST',
         body: JSON.stringify({
             title,
             body
         }),
         headers: {
-            "Content-Type": "application/json",
-            autherization: "Bearer ${token}"
+            'Content-Type': 'application/json',
+            autherization: `Bearer ${token}`
         }
     });
-document.location.replace("/dashboard")
+document.location.replace('/dashboard')
 };
 
-document.querySelector("#new-post").addEventListener("submit", newForm)
+document.querySelector('#new-post').addEventListener('submit', newForm);
