@@ -1,5 +1,4 @@
 const router = require('express').Router();
-// const { Model } = require('sequelize');
 const { User } = require('../../models');
 
 router.post('/', async (req, res) => {
