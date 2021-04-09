@@ -7,8 +7,8 @@ USE tech_db;
 
 -- delete before use
 
-CREATE TABLE tech 
-(
-    id int NOT NULL AUTO_INCREMENT,
-    name
-)
+-- CREATE TABLE tech 
+-- (
+--     id int NOT NULL AUTO_INCREMENT,
+--     name
+-- )
