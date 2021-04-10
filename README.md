@@ -11,7 +11,7 @@
 * [Bcrypt](https://www.npmjs.com/package/bcrypt) - NPM download
 * [Connect-Session-Sequelize](https://www.npmjs.com/package/connect-session-sequelize) - NPM download
 * [dotenv](https://www.npmjs.com/package/dotenv) - NPM download
-* [express-handlebars(https://www.npmjs.com/package/express-handlebars) - NPM download
+* [express-handlebars](https://www.npmjs.com/package/express-handlebars) - NPM download
 * [Express-session](https://www.npmjs.com/package/express-session) - NPM download
 * [MySQL2](https://www.npmjs.com/package/MySQL2) - NPM download
 * [Sequelize](https://www.npmjs.com/package/Sequelize) - NPM download
